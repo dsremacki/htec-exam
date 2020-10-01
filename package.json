@@ -1,0 +1,27 @@
+{
+  "name": "htec-exam",
+  "version": "1.0.0",
+  "description": "HTEC QA Exam - Protractor",
+  "main": "conf.js",
+  "scripts": {
+    "test": "protractor conf.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dyingSatyr/htec-exam.git"
+  },
+  "keywords": [
+    "Protractor",
+    "Automation"
+  ],
+  "author": "Boris Grabovac",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dyingSatyr/htec-exam/issues"
+  },
+  "homepage": "https://github.com/dyingSatyr/htec-exam#readme",
+  "dependencies": {
+    "babel-preset-es2015": "^6.24.1",
+    "babel-register": "^6.26.0"
+  }
+}
