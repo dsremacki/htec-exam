@@ -1,10 +1,6 @@
 class LoginPage {
   constructor() {
     this.URL = "login";
-    //For ng sites we can use element instead of driver.findElement
-    // this.usernameBox = bd.findElement(By.css("input[name='email']"));
-    // this.passwordBox = bd.findElement(By.name("password"));
-    // this.submitBtn = bd.findElement(By.css("[data-testid='submit_btn']"));
   }
 
   /**
@@ -37,6 +33,7 @@ class LoginPage {
    */
   async submitLogin() {
     let submitBtn = await bd.findElement(By.css("[data-testid='submit_btn']"));
+    bd.sleep(100); //Form sometimes submits before browser detects password input !?
     return await submitBtn.click();
   }
 }
