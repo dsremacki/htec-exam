@@ -1,6 +1,6 @@
-import config from "../config/Configuration";
-import loginPage from "../poms/LoginPage";
-import dashboardPage from "../poms/DashboardPage";
+import config from "../../config/Configuration";
+import loginPage from "../../poms/LoginPage";
+import dashboardPage from "../../poms/DashboardPage";
 const EC = protractor.ExpectedConditions;
 
 describe("HTEC QA SandBox Login Module", () => {
