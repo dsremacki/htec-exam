@@ -15,6 +15,7 @@ exports.config = {
   },
   onPrepare: function () {
     global.bd = browser.driver;
+    browser.ignoreSynchronization = true;
   },
   // Options to be passed to Jasmine-node.
   // jasmineNodeOpts: {

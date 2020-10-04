@@ -1,6 +1,9 @@
 class LoginPage {
   constructor() {
     this.URL = "login";
+    this.passwordInput = () => bd.findElement(By.name("password"));
+    this.usernameInput = () => bd.findElement(By.name("email"));
+    this.submitBtn = () => bd.findElement(By.css("[data-testid='submit_btn']"));
   }
 
   /**
@@ -10,7 +13,7 @@ class LoginPage {
    *
    */
   async typePassword(_password) {
-    let passwordBox = await bd.findElement(By.name("password"));
+    let passwordBox = this.passwordInput();
     await passwordBox.clear();
     return await passwordBox.sendKeys(_password);
   }
@@ -22,7 +25,7 @@ class LoginPage {
    *
    */
   async typeUsername(_username) {
-    let usernameBox = await bd.findElement(By.name("email"));
+    let usernameBox = this.usernameInput();
     await usernameBox.clear();
     return await usernameBox.sendKeys(_username);
   }
@@ -32,9 +35,8 @@ class LoginPage {
    * @return {promise}
    */
   async submitLogin() {
-    let submitBtn = await bd.findElement(By.css("[data-testid='submit_btn']"));
     bd.sleep(100); //Form sometimes submits before browser detects password input !?
-    return await submitBtn.click();
+    return await this.submitBtn().click();
   }
 }
 
