@@ -5,7 +5,7 @@ class CreateUseCasePage {
     this.descriptionField = () => bd.findElement(By.name("description"));
     this.expectedResultField = () => bd.findElement(By.name("expected_result"));
     this.stepsField = (n = 0) => bd.findElement(By.name(`testStepId-${n}`));
-    this.automatedSwitch = () => bd.findElement(By.name("automated-switch"));
+    this.automatedSwitch = () => bd.findElement(By.css(".switchToggle label"));
     this.addStepBtn = () =>
       bd.findElement(By.css("button[data-testid='add_step_btn']"));
     this.deleteStepBtns = () =>
@@ -15,30 +15,37 @@ class CreateUseCasePage {
     this.errorMessages = () => bd.findElements(By.css(".invalid-feedback"));
   }
 
-  async createNewUseCase(_useCase) {
-    let title = this.titleField();
-    let desc = this.descriptionField();
-    let er = this.expectedResultField();
-    await title.clear();
-    await title.sendKeys(_useCase.title);
-    if (_useCase.description) {
-      await desc.clear();
-      await desc.sendKeys(_useCase.description);
-    } else {
-      await desc.clear();
-    }
-    await er.clear();
-    await er.sendKeys(_useCase.expectedResult);
+  async clearFormFields() {
+    await this.titleField().clear();
+    await this.descriptionField().clear();
+    await this.expectedResultField().clear();
     await this.closeAllSteps();
-    _useCase.steps.forEach((step, i) => {
-      if (i === 0) {
-        this.stepsField().clear();
-        this.stepsField().sendKeys(step);
-      } else {
-        this.addStepBtn().click();
-        this.stepsField(i).sendKeys(step);
-      }
-    });
+    await this.stepsField().clear();
+  }
+
+  async createNewUseCase(_useCase) {
+    await bd.navigate().refresh();
+    let title = this.titleField();
+    if (_useCase.title) await title.sendKeys(_useCase.title);
+    let desc = this.descriptionField();
+    if (_useCase.description) await desc.sendKeys(_useCase.description);
+    let er = this.expectedResultField();
+    if (_useCase.expectedResult) await er.sendKeys(_useCase.expectedResult);
+    if (_useCase.automated) {
+      let aswitch = this.automatedSwitch();
+      await aswitch.click();
+    }
+    if (_useCase.steps.length) {
+      _useCase.steps.forEach((step, i) => {
+        if (i === 0) {
+          this.stepsField().sendKeys(step);
+        } else {
+          this.addStepBtn().click();
+          this.stepsField(i).sendKeys(step);
+        }
+      });
+    }
+    //Submit the form
     return await this.submitBtn().click();
   }
 
@@ -48,7 +55,7 @@ class CreateUseCasePage {
    * @return {bool}
    */
   async errorMessageExists(_msg) {
-    bd.sleep(100);
+    bd.sleep(200);
     let errorElements = await this.errorMessages();
     let result = false;
     for (let errorElement of errorElements) {

@@ -1,0 +1,51 @@
+export default {
+  validUseCase: {
+    title: "Valid Use Case",
+    description: "Valid use case description",
+    expectedResult: "Something needs to happen1",
+    steps: ["step1", "step2", "step3", "step4"],
+    automated: true,
+  },
+  titleTooShort: {
+    title: "xxxx",
+    description: "Title is too short...",
+    expectedResult: "Should not create use case",
+    steps: ["step1", "step2", "step3", "step4"],
+    automated: true,
+  },
+  titleTooLong: {
+    title: "z".repeat(256),
+    description: "Title is too long...",
+    expectedResult: "Should not create use case",
+    steps: ["step1", "step2", "step3", "step4"],
+    automated: true,
+  },
+  noTitle: {
+    title: "",
+    description: "There is no title...",
+    expectedResult: "Should not create use case",
+    steps: ["step1", "step2", "step3", "step4"],
+    automated: true,
+  },
+  noExpectedResults: {
+    title: "No expected results present",
+    description: "No expected results present",
+    expectedResult: "",
+    steps: ["step1", "step2", "step3", "step4"],
+    automated: true,
+  },
+  expectedResultsTooShort: {
+    title: "Expected result too short",
+    description: "Expected result too short",
+    expectedResult: "1234",
+    steps: ["step1", "step2", "step3", "step4"],
+    automated: true,
+  },
+  expectedResultsTooLong: {
+    title: "Expected result too long",
+    description: "Expected result too long",
+    expectedResult: "x".repeat(256),
+    steps: ["step1", "step2", "step3", "step4"],
+    automated: true,
+  },
+};
