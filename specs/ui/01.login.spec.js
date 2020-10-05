@@ -13,9 +13,7 @@ describe("HTEC QA SandBox Login Module", () => {
   });
 
   it("should be able to login with correct credentials", async () => {
-    loginPage.typeUsername(config.email);
-    loginPage.typePassword(config.pass);
-    loginPage.submitLogin();
+    loginPage.logTheUserIn(config.email, config.pass);
     await bd.wait(EC.urlContains(dashboardPage.URL), config.TIMEOUT.short);
     expect(await bd.getCurrentUrl()).toEqual(
       `${config.BASE_URL}${dashboardPage.URL}`

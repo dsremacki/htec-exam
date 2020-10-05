@@ -2,9 +2,16 @@ export default {
   validUseCase: {
     title: "Valid Use Case",
     description: "Valid use case description",
-    expectedResult: "Something needs to happen1",
+    expectedResult: "Something needs to happen",
     steps: ["step1", "step2", "step3", "step4"],
     automated: true,
+  },
+  validUseCaseUpdate: {
+    title: "Valid Use Case Update",
+    description: "Valid use case description Update",
+    expectedResult: "Something needs to happen Update",
+    steps: ["new step1", "new step2", "new step3", "new step4"],
+    automated: false,
   },
   titleTooShort: {
     title: "xxxx",
@@ -46,6 +53,20 @@ export default {
     description: "Expected result too long",
     expectedResult: "x".repeat(256),
     steps: ["step1", "step2", "step3", "step4"],
+    automated: true,
+  },
+  noUseCaseSteps: {
+    title: "No use case steps",
+    description: "No use case steps",
+    expectedResult: "Can't create use case with no steps",
+    steps: [],
+    automated: true,
+  },
+  tooLongUseCaseStep: {
+    title: "Too long use case step",
+    description: "Too long use case step",
+    expectedResult: "Can't create use case with step being too long",
+    steps: ["x".repeat(256)],
     automated: true,
   },
 };
