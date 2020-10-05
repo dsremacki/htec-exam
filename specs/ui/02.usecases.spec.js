@@ -9,9 +9,7 @@ const EC = protractor.ExpectedConditions;
 describe("Use Cases Detailed UI Test", () => {
   beforeAll(async () => {
     await bd.get(`${config.BASE_URL}${loginPage.URL}`);
-    loginPage.typeUsername(config.email);
-    loginPage.typePassword(config.pass);
-    loginPage.submitLogin();
+    await loginPage.logTheUserIn(config.email, config.pass);
     await bd.wait(EC.urlContains(dashboardPage.URL), config.TIMEOUT.short);
     await dashboardPage.goToUseCases();
     await bd.wait(EC.urlContains(useCasesPage.URL), config.TIMEOUT.short);

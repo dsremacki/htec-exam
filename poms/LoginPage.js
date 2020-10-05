@@ -38,6 +38,16 @@ class LoginPage {
     bd.sleep(100); //Form sometimes submits before browser detects password input !?
     return await this.submitBtn().click();
   }
+
+  /**
+   * does the complete login procedure
+   * @return {promise}
+   */
+  async logTheUserIn(_username, _password) {
+    await this.typePassword(_password);
+    await this.typeUsername(_username);
+    return await this.submitLogin();
+  }
 }
 
 export default new LoginPage();
