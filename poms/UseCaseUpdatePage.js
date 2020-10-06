@@ -1,3 +1,6 @@
+const EC = protractor.ExpectedConditions;
+import config from "../config/Configuration";
+
 class UpdateUseCasePage {
   constructor() {
     this.titleField = () => bd.findElement(By.name("title"));
@@ -24,6 +27,11 @@ class UpdateUseCasePage {
    * @return {promise}
    */
   async updateUseCase(_useCase) {
+    await browser.wait(
+      EC.visibilityOf(element(By.name("title"))),
+      config.TIMEOUT.medium
+    );
+
     let title = this.titleField();
     if (_useCase.title) {
       await title.clear();
@@ -80,14 +88,24 @@ class UpdateUseCasePage {
    * @return {promise}
    */
   async updateUseCaseWithLengthOfPreviousValue() {
+    await browser.wait(
+      EC.visibilityOf(element(By.name("title"))),
+      config.TIMEOUT.medium
+    );
+    // await bd.sleep(3000);
+    //Update text area
+    let desc = this.descriptionField();
+    let currentDescValue = await desc.getAttribute("value");
+    await desc.clear();
+    await desc.sendKeys(this.generateExamFieldValue(currentDescValue.length));
+    //All other inputs
     let inputs = await bd.findElements(By.css("input[type='text']"));
     inputs.forEach(async (input) => {
       let inputValue = await input.getAttribute("value");
-      console.log(inputValue);
       await input.clear();
       await input.sendKeys(this.generateExamFieldValue(inputValue.length));
     });
-    bd.sleep(3000);
+    await bd.sleep(500);
     return await this.submitBtn().click();
   }
 
@@ -107,13 +125,19 @@ class UpdateUseCasePage {
    * @return {promise}
    */
   async deleteUseCase() {
+    await browser.wait(
+      EC.elementToBeClickable(
+        element(By.css("button[data-testid='remove_usecase_btn']")),
+        config.TIMEOUT.medium
+      )
+    );
     let deleteBtn = this.deleteUseCaseBtn();
     await deleteBtn.click();
-    await bd.wait(
-      protractor.ExpectedConditions.elementToBeClickable(
-        $("div.sweet-alert button.btn-danger")
-      ),
-      5 * 1000
+    await browser.wait(
+      EC.elementToBeClickable(
+        element(By.css("div.sweet-alert button.btn-danger")),
+        config.TIMEOUT.medium
+      )
     );
     let confirmBtn = this.deleteUseCaseConfirmBtn();
     return await confirmBtn.click();

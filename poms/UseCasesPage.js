@@ -12,7 +12,7 @@ class UseCases {
    * @returns {promise}
    */
   async goToCreateUseCase() {
-    await bd.wait(
+    await browser.wait(
       EC.visibilityOf($("a[data-testid='create_use_case_btn']")),
       config.TIMEOUT.medium
     );
@@ -25,17 +25,15 @@ class UseCases {
    * @returns {promise}
    */
   async goToUseCase(_title) {
-    // await bd.wait(
-    //   EC.visibilityOf(
-    //     bd.findElement(By.xpath(`//a[contains(.,'${_title}')]`)),
-    //     config.TIMEOUT.long
-    //   )
-    // );
+    await browser.wait(
+      EC.visibilityOf(element(By.xpath(`//a[contains(.,'${_title}')]`))),
+      config.TIMEOUT.medium
+    );
 
-    bd.sleep(1000);
-
-    let useCase = bd.findElement(By.xpath(`//a[contains(.,'${_title}')]`));
-    return await useCase.click();
+    let useCase = await bd.findElements(
+      By.xpath(`//a[contains(.,'${_title}')]`)
+    );
+    return await useCase[0].click();
   }
 }
 

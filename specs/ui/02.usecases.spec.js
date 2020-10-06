@@ -128,7 +128,7 @@ describe("Use Cases Detailed UI Test", () => {
     ).toBe(true);
   });
 
-  it("should create 4 different use cases", async () => {
+  it("should create 4 different exam use cases", async () => {
     testData.exam.forEach(async (useCase) => {
       await useCasesPage.goToCreateUseCase();
       expect(
@@ -144,19 +144,19 @@ describe("Use Cases Detailed UI Test", () => {
     });
   });
 
-  it("should update use case base on the previous values length", async () => {
-    // testData.exam.forEach(async (useCase) => {
-    //   await useCasesPage.goToUseCase(useCase.title);
-    //   expect(
-    //     await bd.wait(
-    //       EC.visibilityOf($("button[data-testid='remove_usecase_btn']")),
-    //       config.TIMEOUT.long
-    //     )
-    //   ).toBe(true);
-    //   await useCaseUpdatePage.updateUseCaseWithLengthOfPreviousValue();
-    // });
-    await useCasesPage.goToUseCase(testData.exam[0].title);
-    bd.sleep(2000);
-    await useCaseUpdatePage.updateUseCaseWithLengthOfPreviousValue();
+  it("should update exam use cases based on the previous values length", async () => {
+    testData.exam.forEach(async (useCase) => {
+      await useCasesPage.goToUseCase(useCase.title);
+      await useCaseUpdatePage.updateUseCaseWithLengthOfPreviousValue();
+    });
+  });
+
+  it("should delete exam use cases", async () => {
+    testData.exam.forEach(async (useCase) => {
+      await useCasesPage.goToUseCase(
+        `This field previously had ${useCase.title.length} characters`
+      );
+      await useCaseUpdatePage.deleteUseCase();
+    });
   });
 });
