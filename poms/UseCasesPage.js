@@ -1,3 +1,5 @@
+const EC = protractor.ExpectedConditions;
+import config from "../config/Configuration";
 class UseCases {
   constructor() {
     this.URL = "use-cases";
@@ -10,6 +12,10 @@ class UseCases {
    * @returns {promise}
    */
   async goToCreateUseCase() {
+    await bd.wait(
+      EC.visibilityOf($("a[data-testid='create_use_case_btn']")),
+      config.TIMEOUT.medium
+    );
     return await this.createUseCaseBtn().click();
   }
 

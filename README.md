@@ -34,6 +34,8 @@ And:
 - `npm run test-ui` will run only ui test suite.
 - `npm run test-api` will run only api test suite.
 
+**Note:** Tests will cleanup after themselves, which means you can run them in any order and as many times as you wish.
+
 ## Author
 
 :man: Boris Grabovac

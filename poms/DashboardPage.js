@@ -6,9 +6,10 @@ class DashboardPage {
     this.logoutLink = () =>
       bd.findElement(By.css(".navbar-nav li:last-child a"));
     this.profileLink = () =>
-      bd.findElement(By.css("div[data-testid='profile_card_id'] div a"));
+      //added img at the end since gecko can't click the A directly ?!
+      bd.findElement(By.css("div[data-testid='profile_card_id'] div a img"));
     this.useCasesLink = () =>
-      bd.findElement(By.css("div[data-testid='use_cases_card_id'] div a"));
+      bd.findElement(By.css("div[data-testid='use_cases_card_id'] div a img"));
   }
 
   /**
@@ -22,7 +23,7 @@ class DashboardPage {
 
   async goToProfile() {
     await bd.wait(
-      EC.presenceOf($("div[data-testid='profile_card_id'] div a")),
+      EC.visibilityOf($("div[data-testid='profile_card_id'] div a")),
       config.TIMEOUT.short
     );
     return await this.profileLink().click();
@@ -30,8 +31,8 @@ class DashboardPage {
 
   async goToUseCases() {
     await bd.wait(
-      EC.presenceOf($("div[data-testid='use_cases_card_id'] div a")),
-      config.TIMEOUT.short
+      EC.visibilityOf($("div[data-testid='use_cases_card_id'] div a")),
+      config.TIMEOUT.long
     );
     return await this.useCasesLink().click();
   }
