@@ -5,7 +5,6 @@ import useCasesPage from "../../poms/UseCasesPage";
 import useCaseCreate from "../../poms/UseCaseCreatePage";
 import useCaseUpdatePage from "../../poms/UseCaseUpdatePage";
 import testData from "./testdata/usecases";
-import UseCaseCreatePage from "../../poms/UseCaseCreatePage";
 const EC = protractor.ExpectedConditions;
 
 describe("Use Cases Detailed UI Test", () => {
@@ -127,5 +126,37 @@ describe("Use Cases Detailed UI Test", () => {
         config.TIMEOUT.short
       )
     ).toBe(true);
+  });
+
+  it("should create 4 different use cases", async () => {
+    testData.exam.forEach(async (useCase) => {
+      await useCasesPage.goToCreateUseCase();
+      expect(
+        await bd.wait(EC.urlContains(useCaseCreate.URL), config.TIMEOUT.short)
+      ).toBe(true);
+      await useCaseCreate.createNewUseCase(useCase);
+      expect(
+        await bd.wait(
+          EC.urlIs(`${config.BASE_URL}${useCasesPage.URL}`),
+          config.TIMEOUT.short
+        )
+      ).toBe(true);
+    });
+  });
+
+  it("should update use case base on the previous values length", async () => {
+    // testData.exam.forEach(async (useCase) => {
+    //   await useCasesPage.goToUseCase(useCase.title);
+    //   expect(
+    //     await bd.wait(
+    //       EC.visibilityOf($("button[data-testid='remove_usecase_btn']")),
+    //       config.TIMEOUT.long
+    //     )
+    //   ).toBe(true);
+    //   await useCaseUpdatePage.updateUseCaseWithLengthOfPreviousValue();
+    // });
+    await useCasesPage.goToUseCase(testData.exam[0].title);
+    bd.sleep(2000);
+    await useCaseUpdatePage.updateUseCaseWithLengthOfPreviousValue();
   });
 });

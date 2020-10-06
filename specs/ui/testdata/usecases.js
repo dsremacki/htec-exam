@@ -69,4 +69,50 @@ export default {
     steps: ["x".repeat(256)],
     automated: true,
   },
+  exam: [
+    {
+      title: "1. Exam: Use Case One xxxxx",
+      description: "First use case for the exam.",
+      expectedResult: "First use case should be successfully created.",
+      steps: [
+        "Step 1 for first exam use case",
+        "Step 2 for first exam use case",
+        "Step 3 for first exam use case",
+      ],
+      automated: true,
+    },
+    {
+      title: "2. Exam: Use Case Two xxxxxxxxxx",
+      description: "Second use case for the exam.",
+      expectedResult: "Second use case should be successfully created.",
+      steps: [
+        "Step 1 for second exam use case",
+        "Step 2 for second exam use case",
+        "Step 3 for second exam use case",
+      ],
+      automated: true,
+    },
+    {
+      title: "3. Exam: Use Case Three xxxxxxxxxxxxxxx",
+      description: "Third use case for the exam.",
+      expectedResult: "Third use case should be successfully created.",
+      steps: [
+        "Step 1 for third exam use case",
+        "Step 2 for third exam use case",
+        "Step 3 for third exam use case",
+      ],
+      automated: true,
+    },
+    {
+      title: "4. Exam: Use Case Four xxxxxxxxxxxxxxxxxxxx",
+      description: "Fourth use case for the exam.",
+      expectedResult: "Fourth use case should be successfully created.",
+      steps: [
+        "Step 1 for fourth exam use case",
+        "Step 2 for fourth exam use case",
+        "Step 3 for fourth exam use case",
+      ],
+      automated: true,
+    },
+  ],
 };

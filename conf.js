@@ -8,6 +8,7 @@ exports.config = {
   // specs: ["specs/*.spec.js"],
   capabilities: {
     browserName: "chrome",
+    //add incognito, full screen, headless
   },
   suites: {
     ui: ["specs/ui/*.spec.js"],

@@ -25,9 +25,16 @@ class UseCases {
    * @returns {promise}
    */
   async goToUseCase(_title) {
-    bd.sleep(100);
-    let useCase = await bd.findElement(By.xpath(`//a[text()='${_title}']`));
+    // await bd.wait(
+    //   EC.visibilityOf(
+    //     bd.findElement(By.xpath(`//a[contains(.,'${_title}')]`)),
+    //     config.TIMEOUT.long
+    //   )
+    // );
 
+    bd.sleep(1000);
+
+    let useCase = bd.findElement(By.xpath(`//a[contains(.,'${_title}')]`));
     return await useCase.click();
   }
 }

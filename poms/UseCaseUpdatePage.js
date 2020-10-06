@@ -18,6 +18,11 @@ class UpdateUseCasePage {
       bd.findElement(By.css("div.sweet-alert button.btn-danger"));
   }
 
+  /**
+   * Updates the use case with new values
+   * @param {object} _useCase
+   * @return {promise}
+   */
   async updateUseCase(_useCase) {
     let title = this.titleField();
     if (_useCase.title) {
@@ -60,6 +65,35 @@ class UpdateUseCasePage {
     return await this.submitBtn().click();
   }
 
+  /**
+   * Generates a string for new field value
+   * @param {int} _length
+   * @return {string} field value
+   */
+  generateExamFieldValue(_length) {
+    return `This field previously had ${_length} characters`;
+  }
+
+  /**
+   * Updates use case with all the input fields changed
+   * to a string based on their current length
+   * @return {promise}
+   */
+  async updateUseCaseWithLengthOfPreviousValue() {
+    let inputs = await bd.findElements(By.css("input[type='text']"));
+    inputs.forEach(async (input) => {
+      let inputValue = await input.getAttribute("value");
+      console.log(inputValue);
+      await input.clear();
+      await input.sendKeys(this.generateExamFieldValue(inputValue.length));
+    });
+    bd.sleep(3000);
+    return await this.submitBtn().click();
+  }
+
+  /**
+   * Closes all additional use case steps
+   */
   async closeAllSteps() {
     let buttons = await this.deleteStepBtns();
     while (buttons.length) {
@@ -68,10 +102,13 @@ class UpdateUseCasePage {
     }
   }
 
+  /**
+   * Deletes the current use case
+   * @return {promise}
+   */
   async deleteUseCase() {
     let deleteBtn = this.deleteUseCaseBtn();
     await deleteBtn.click();
-
     await bd.wait(
       protractor.ExpectedConditions.elementToBeClickable(
         $("div.sweet-alert button.btn-danger")

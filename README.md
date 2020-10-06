@@ -36,6 +36,10 @@ And:
 
 **Note:** Tests will cleanup after themselves, which means you can run them in any order and as many times as you wish.
 
+#### Misc
+
+[Cuz of this](https://bugs.chromium.org/p/chromedriver/issues/detail?id=2702&q=&sort=-id&colspec=ID%20Status%20Pri%20Owner%20Summary) I almost lost my mind.
+
 ## Author
 
 :man: Boris Grabovac
