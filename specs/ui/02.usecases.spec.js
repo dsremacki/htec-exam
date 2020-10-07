@@ -6,7 +6,7 @@ import useCaseCreate from "../../poms/UseCaseCreatePage";
 import useCaseUpdatePage from "../../poms/UseCaseUpdatePage";
 import testData from "./testdata/usecases";
 
-describe("Use Cases Detailed UI Test", () => {
+describe("[UI] HTEC QA SandBox - Use Cases", () => {
   beforeAll(async () => {
     await bd.get(`${config.BASE_URL}${loginPage.URL}`);
     await loginPage.logTheUserIn(config.email, config.pass);

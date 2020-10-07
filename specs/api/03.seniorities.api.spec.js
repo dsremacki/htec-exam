@@ -8,7 +8,7 @@ let testData = {
   tooLongSeniorityName: "123456789012345678901234567890X", //31
 };
 
-describe("[API] Playground/Seniorities", () => {
+describe("[API] HTEC QA SandBox - Seniorities", () => {
   beforeAll(async () => {
     let response = await API.login(config.email, config.pass);
     jwt = response.data.token;

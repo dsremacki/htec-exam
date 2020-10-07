@@ -3,7 +3,7 @@ import loginPage from "../../poms/LoginPage";
 import dashboardPage from "../../poms/DashboardPage";
 const EC = protractor.ExpectedConditions;
 
-describe("HTEC QA SandBox Login Module", () => {
+describe("[UI] HTEC QA SandBox - Login", () => {
   beforeAll(async () => {
     await bd.get(`${config.BASE_URL}${loginPage.URL}`);
   });

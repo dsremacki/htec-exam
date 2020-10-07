@@ -8,7 +8,7 @@ let testData = {
   tooLongTechnologyName: "123456789012345678901234567890X", //31
 };
 
-describe("[API] Playground/Technologies", () => {
+describe("[API] HTEC QA SandBox - Technologies", () => {
   beforeAll(async () => {
     let response = await API.login(config.email, config.pass);
     jwt = response.data.token;

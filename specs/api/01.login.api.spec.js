@@ -1,7 +1,7 @@
 import config from "../../config/Configuration";
 import API from "../../api/ApiUtils";
 
-describe("[API] HTEC QA SandBox Login Module", () => {
+describe("[API] HTEC QA SandBox - Login", () => {
   it("shouldn't be able to login with non registered email", async () => {
     let response = await API.login("zzz@yyy.xxx", "Whatevah");
     expect(response.status).toBe(404);
