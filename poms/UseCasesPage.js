@@ -35,6 +35,17 @@ class UseCases {
     );
     return await useCase[0].click();
   }
+
+  /**
+   * Checks if browser on page
+   * @return {promise} resolves to bool
+   */
+  async amOnPage() {
+    return await browser.wait(
+      EC.urlIs(`${config.BASE_URL}${this.URL}`),
+      config.TIMEOUT.short
+    );
+  }
 }
 
 export default new UseCases();

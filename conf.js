@@ -10,7 +10,7 @@ exports.config = {
   seleniumAddress: "http://localhost:4444/wd/hub",
   // specs: ["specs/*.spec.js"],
   capabilities: {
-    browserName: "chrome",
+    browserName: "firefox",
     chromeOptions: {
       args: ["--start-maximized", "--incognito"],
       //for headless add "--headless" ^
@@ -45,9 +45,9 @@ exports.config = {
       const HTMLReport = require("protractor-html-reporter-2");
 
       testConfig = {
-        reportTitle: "Protractor Test Execution Report",
+        reportTitle: "HTEC Test Execution Report",
         outputPath: "./reports",
-        outputFilename: "ProtractorTestReport",
+        outputFilename: "HTECTestReport",
         screenshotPath: "./screenshots",
         testBrowser: browserName,
         browserVersion: browserVersion,

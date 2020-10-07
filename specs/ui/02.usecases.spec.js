@@ -5,15 +5,14 @@ import useCasesPage from "../../poms/UseCasesPage";
 import useCaseCreate from "../../poms/UseCaseCreatePage";
 import useCaseUpdatePage from "../../poms/UseCaseUpdatePage";
 import testData from "./testdata/usecases";
-const EC = protractor.ExpectedConditions;
 
 describe("Use Cases Detailed UI Test", () => {
   beforeAll(async () => {
     await bd.get(`${config.BASE_URL}${loginPage.URL}`);
     await loginPage.logTheUserIn(config.email, config.pass);
-    await bd.wait(EC.urlContains(dashboardPage.URL), config.TIMEOUT.short);
+    await dashboardPage.amOnDashboardPage();
     await dashboardPage.goToUseCases();
-    await bd.wait(EC.urlContains(useCasesPage.URL), config.TIMEOUT.short);
+    await useCasesPage.amOnPage();
   });
 
   afterAll(async () => {
@@ -22,9 +21,7 @@ describe("Use Cases Detailed UI Test", () => {
 
   it("should open use case creation page", async () => {
     await useCasesPage.goToCreateUseCase();
-    expect(
-      await bd.wait(EC.urlContains(useCaseCreate.URL), config.TIMEOUT.short)
-    ).toBe(true);
+    expect(await useCaseCreate.amOnCreatePage()).toBe(true);
   });
 
   it("shouldn't create a new use case with title out of range (5-255)", async () => {
@@ -83,64 +80,32 @@ describe("Use Cases Detailed UI Test", () => {
 
   it("should create a valid use case", async () => {
     await useCaseCreate.createNewUseCase(testData.validUseCase);
-    expect(
-      await bd.wait(
-        EC.urlIs(`${config.BASE_URL}${useCasesPage.URL}`),
-        config.TIMEOUT.short
-      )
-    ).toBe(true);
+    expect(await useCasesPage.amOnPage()).toBe(true);
   });
 
   it("should navigate to specific use case page", async () => {
     await useCasesPage.goToUseCase(testData.validUseCase.title);
-    expect(
-      await bd.wait(
-        EC.visibilityOf($("button[data-testid='remove_usecase_btn']")),
-        config.TIMEOUT.long
-      )
-    ).toBe(true);
+    expect(useCaseUpdatePage.amOnUpdatePage()).toBe(true);
   });
 
   it("should update existing use case", async () => {
     await useCaseUpdatePage.updateUseCase(testData.validUseCaseUpdate);
-    expect(
-      await bd.wait(
-        EC.urlIs(`${config.BASE_URL}${useCasesPage.URL}`),
-        config.TIMEOUT.short
-      )
-    ).toBe(true);
+    expect(await useCasesPage.amOnPage()).toBe(true);
   });
 
   it("should delete existing use case", async () => {
     await useCasesPage.goToUseCase(testData.validUseCaseUpdate.title);
-    expect(
-      await bd.wait(
-        EC.visibilityOf($("button[data-testid='remove_usecase_btn']")),
-        config.TIMEOUT.long
-      )
-    ).toBe(true);
+    expect(await useCaseUpdatePage.amOnUpdatePage()).toBe(true);
     await useCaseUpdatePage.deleteUseCase();
-    expect(
-      await bd.wait(
-        EC.urlIs(`${config.BASE_URL}${useCasesPage.URL}`),
-        config.TIMEOUT.short
-      )
-    ).toBe(true);
+    expect(await useCasesPage.amOnPage()).toBe(true);
   });
 
   it("should create 4 different exam use cases", async () => {
     testData.exam.forEach(async (useCase) => {
       await useCasesPage.goToCreateUseCase();
-      expect(
-        await bd.wait(EC.urlContains(useCaseCreate.URL), config.TIMEOUT.short)
-      ).toBe(true);
+      expect(await useCaseCreate.amOnCreatePage()).toBe(true);
       await useCaseCreate.createNewUseCase(useCase);
-      expect(
-        await bd.wait(
-          EC.urlIs(`${config.BASE_URL}${useCasesPage.URL}`),
-          config.TIMEOUT.short
-        )
-      ).toBe(true);
+      expect(await useCasesPage.amOnPage()).toBe(true);
     });
   });
 
@@ -148,6 +113,7 @@ describe("Use Cases Detailed UI Test", () => {
     testData.exam.forEach(async (useCase) => {
       await useCasesPage.goToUseCase(useCase.title);
       await useCaseUpdatePage.updateUseCaseWithLengthOfPreviousValue();
+      expect(await useCasesPage.amOnPage()).toBe(true);
     });
   });
 
@@ -156,7 +122,9 @@ describe("Use Cases Detailed UI Test", () => {
       await useCasesPage.goToUseCase(
         `This field previously had ${useCase.title.length} characters`
       );
+      expect(await useCaseUpdatePage.amOnUpdatePage()).toBe(true);
       await useCaseUpdatePage.deleteUseCase();
+      expect(await useCasesPage.amOnPage()).toBe(true);
     });
   });
 });

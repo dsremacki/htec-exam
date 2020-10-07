@@ -140,6 +140,17 @@ class UpdateUseCasePage {
     let confirmBtn = this.deleteUseCaseConfirmBtn();
     return await confirmBtn.click();
   }
+
+  /**
+   * Checks if browser on page
+   * @return {promise} resolves to bool
+   */
+  async amOnUpdatePage() {
+    return await browser.wait(
+      EC.visibilityOf($("button[data-testid='remove_usecase_btn']")),
+      config.TIMEOUT.long
+    );
+  }
 }
 
 export default new UpdateUseCasePage();

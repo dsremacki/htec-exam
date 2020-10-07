@@ -1,3 +1,6 @@
+const EC = protractor.ExpectedConditions;
+import config from "../config/Configuration";
+
 class CreateUseCasePage {
   constructor() {
     this.URL = "create-usecase";
@@ -15,14 +18,10 @@ class CreateUseCasePage {
     this.errorMessages = () => bd.findElements(By.css(".invalid-feedback"));
   }
 
-  async clearFormFields() {
-    await this.titleField().clear();
-    await this.descriptionField().clear();
-    await this.expectedResultField().clear();
-    await this.closeAllSteps();
-    await this.stepsField().clear();
-  }
-
+  /**
+   * Creates a new use case
+   * @param {object} _useCase
+   */
   async createNewUseCase(_useCase) {
     await bd.navigate().refresh();
     let title = this.titleField();
@@ -64,12 +63,25 @@ class CreateUseCasePage {
     return result;
   }
 
+  /**
+   * Closes all additional use case steps
+   * if they exist
+   * @return {void}
+   */
   async closeAllSteps() {
     let buttons = await this.deleteStepBtns();
     while (buttons.length) {
       await buttons[0].click();
       buttons = await this.deleteStepBtns();
     }
+  }
+
+  /**
+   * Checks if browser on page
+   * @return {promise} resolves to bool
+   */
+  async amOnCreatePage() {
+    return await browser.wait(EC.urlContains(this.URL), config.TIMEOUT.medium);
   }
 }
 
