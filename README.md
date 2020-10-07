@@ -1,13 +1,14 @@
 # HTEC QA Automation Demo Project
 
-Protractor automation
+Protractor automation test suite.
 
 ## :rocket: Project Setup
 
 #### :bell: Preconditions
 
-1. [nodejs](https://nodejs.org/en/) (and npm) is installed
+1. [nodejs](https://nodejs.org/en/) (and npm) is installed.
 2. [JDK](https://www.java.com/en/download/manual.jsp) is installed and added to path.
+3. Chrome (and/or Firefox) should be updated to the latest version.
 
 #### :cd: Installation
 
@@ -18,7 +19,7 @@ Update webdriver-manager:
 `webdriver-manager update`
 
 Clone this repo, and in its root directory run:
-`npm i`
+`npm i` to install the dependencies.
 
 #### :fire: Running tests
 
@@ -36,9 +37,14 @@ And:
 
 **Note:** Tests will cleanup after themselves, which means you can run them in any order and as many times as you wish.
 
-#### Misc
+#### :chart_with_upwards_trend: Reports
 
-[Cuz of this](https://bugs.chromium.org/p/chromedriver/issues/detail?id=2702&q=&sort=-id&colspec=ID%20Status%20Pri%20Owner%20Summary) I almost lost my mind.
+After each test run, reports will be generated in the `reports` directory.
+Generated HTML file is more suitable for manual review.
+
+#### :bomb: Misc
+
+[Because of this](https://bugs.chromium.org/p/chromedriver/issues/detail?id=2702&q=&sort=-id&colspec=ID%20Status%20Pri%20Owner%20Summary) :bug: I almost lost my mind. Up in here, up in here.
 
 ## Author
 
