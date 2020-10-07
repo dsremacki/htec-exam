@@ -7,8 +7,11 @@ exports.config = {
   seleniumAddress: "http://localhost:4444/wd/hub",
   // specs: ["specs/*.spec.js"],
   capabilities: {
-    browserName: "firefox",
-    //add incognito, full screen, headless
+    browserName: "chrome",
+    chromeOptions: {
+      args: ["--start-maximized", "--incognito"],
+      //for headless add "--headless" ^
+    },
   },
   suites: {
     ui: ["specs/ui/*.spec.js"],
@@ -18,8 +21,4 @@ exports.config = {
     global.bd = browser.driver;
     browser.ignoreSynchronization = true;
   },
-  // Options to be passed to Jasmine-node.
-  // jasmineNodeOpts: {
-  //   showColors: true, // Use colors in the command line report.
-  // },
 };
