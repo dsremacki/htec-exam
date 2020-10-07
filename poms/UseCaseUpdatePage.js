@@ -92,7 +92,6 @@ class UpdateUseCasePage {
       EC.visibilityOf(element(By.name("title"))),
       config.TIMEOUT.medium
     );
-    // await bd.sleep(3000);
     //Update text area
     let desc = this.descriptionField();
     let currentDescValue = await desc.getAttribute("value");
@@ -100,12 +99,11 @@ class UpdateUseCasePage {
     await desc.sendKeys(this.generateExamFieldValue(currentDescValue.length));
     //All other inputs
     let inputs = await bd.findElements(By.css("input[type='text']"));
-    inputs.forEach(async (input) => {
+    for (let input of inputs) {
       let inputValue = await input.getAttribute("value");
       await input.clear();
       await input.sendKeys(this.generateExamFieldValue(inputValue.length));
-    });
-    await bd.sleep(500);
+    }
     return await this.submitBtn().click();
   }
 
